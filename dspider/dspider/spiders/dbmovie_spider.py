@@ -12,6 +12,12 @@ class DMovieSpider(CrawlSpider):
     allowed_domains = ["douban.com"]
     start_urls = [
         "https://movie.douban.com/subject/26704620/",
+        "https://movie.douban.com/subject/26838164/",
+        "https://movie.douban.com/subject/25823275/",
+        "https://movie.douban.com/subject/26649931/",
+        "https://movie.douban.com/subject/26727298",
+        "https://movie.douban.com/subject/2340927",
+        "https://movie.douban.com/subject/2338055",
         "https://movie.douban.com/subject/26674019/",
         "https://movie.douban.com/tv/#!type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=0",
         "https://movie.douban.com/chart",
@@ -26,8 +32,8 @@ class DMovieSpider(CrawlSpider):
 
     rules =(
         Rule(LinkExtractor(allow=r'/subject/[0-9]+',process_value = process_value),callback= 'parse_subject', follow= True ),
-        Rule(LinkExtractor(allow=r'/tag'), follow= True ),
-        Rule(LinkExtractor(allow=r'/tag/电视剧'), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag'), follow= False ),
+        Rule(LinkExtractor(allow=r'/tag/电视剧'), follow= False ),
     )
 
 

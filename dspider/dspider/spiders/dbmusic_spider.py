@@ -12,6 +12,8 @@ class DMusicSpider(CrawlSpider):
     allowed_domains = ["douban.com"]
     start_urls = [
         "https://book.douban.com/subject/26758235/",
+        "https://book.douban.com/subject/26848051/",
+        "https://book.douban.com/subject/25862578/",
         "https://book.douban.com/tag/%E5%A4%96%E5%9B%BD%E6%96%87%E5%AD%A6",
         "https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4",
     ]
@@ -23,7 +25,7 @@ class DMusicSpider(CrawlSpider):
 
     rules =(
         Rule(LinkExtractor(allow=r'/subject/[0-9]+',process_value = process_value),callback= 'parse_subject', follow= True ),
-        Rule(LinkExtractor(allow=r'/tag'), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag'), follow= False ),
     )
 
 
