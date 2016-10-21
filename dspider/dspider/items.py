@@ -21,3 +21,13 @@ class DMovieItem(scrapy.Item):
     type = scrapy.Field()
     summary = scrapy.Field()
     url = scrapy.Field()
+
+class DMusicItem(scrapy.Item):
+    name = scrapy.Field()
+    score = scrapy.Field()
+    type = scrapy.Field()
+    authors = scrapy.Field()
+    summary = scrapy.Field()
+    author_summary = scrapy.Field()
+    url = scrapy.Field()
+

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from dspider.items import DMovieItem
@@ -11,8 +12,11 @@ class DMovieSpider(CrawlSpider):
     allowed_domains = ["douban.com"]
     start_urls = [
         "https://movie.douban.com/subject/26704620/",
+        "https://movie.douban.com/subject/26674019/",
+        "https://movie.douban.com/tv/#!type=tv&tag=%E7%83%AD%E9%97%A8&sort=recommend&page_limit=20&page_start=0",
         "https://movie.douban.com/chart",
         "https://movie.douban.com/tag",
+        "https://movie.douban.com/tag/电视剧",
     ]
 
     def process_value(value):
@@ -22,7 +26,8 @@ class DMovieSpider(CrawlSpider):
 
     rules =(
         Rule(LinkExtractor(allow=r'/subject/[0-9]+',process_value = process_value),callback= 'parse_subject', follow= True ),
-        Rule(LinkExtractor(allow=r'/tag',process_value = process_value), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag'), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag/电视剧'), follow= True ),
     )
 
 
