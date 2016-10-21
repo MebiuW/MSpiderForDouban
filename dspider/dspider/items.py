@@ -18,4 +18,6 @@ class DMovieItem(scrapy.Item):
     score = scrapy.Field()
     director = scrapy.Field()
     actors = scrapy.Field()
-    score = scrapy.Field()
+    type = scrapy.Field()
+    summary = scrapy.Field()
+    url = scrapy.Field()
