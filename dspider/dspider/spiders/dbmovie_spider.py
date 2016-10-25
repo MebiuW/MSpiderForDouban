@@ -30,10 +30,20 @@ class DMovieSpider(CrawlSpider):
         if m:
             return m.group(0)
 
+    def process_value2(value):
+        m = re.search(r"https://movie.douban.com/tag/[^*]+$/", value)
+        if m:
+            return m.group(0)
+
+    def process_value3(value):
+        m = re.search(r"https://movie.douban.com/tag/[^*]+?start=[0-9]+/", value)
+        if m:
+            return m.group(0)
+
     rules =(
         Rule(LinkExtractor(allow=r'/subject/[0-9]+',process_value = process_value),callback= 'parse_subject', follow= True ),
-        Rule(LinkExtractor(allow=r'/tag'), follow= True ),
-        Rule(LinkExtractor(allow=r'/tag/电视剧'), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag/[^*]+$',process_value = process_value3), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag/[^*]+?start=[0-9]+',process_value = process_value2), follow= True ),
     )
 
 
