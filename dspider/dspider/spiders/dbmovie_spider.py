@@ -9,7 +9,7 @@ import re
 
 class DMovieSpider(CrawlSpider):
     name = "dbmovie"
-    allowed_domains = ["douban.com"]
+    allowed_domains = ["movie.douban.com"]
     start_urls = [
         "https://movie.douban.com/subject/26704620/",
         "https://movie.douban.com/subject/26838164/",
