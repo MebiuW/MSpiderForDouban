@@ -32,8 +32,8 @@ class DMovieSpider(CrawlSpider):
 
     rules =(
         Rule(LinkExtractor(allow=r'/subject/[0-9]+',process_value = process_value),callback= 'parse_subject', follow= True ),
-        Rule(LinkExtractor(allow=r'/tag'), follow= False ),
-        Rule(LinkExtractor(allow=r'/tag/电视剧'), follow= False ),
+        Rule(LinkExtractor(allow=r'/tag'), follow= True ),
+        Rule(LinkExtractor(allow=r'/tag/电视剧'), follow= True ),
     )
 
 
