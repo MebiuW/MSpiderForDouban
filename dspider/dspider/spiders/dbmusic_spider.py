@@ -9,7 +9,7 @@ import re
 
 class DMusicSpider(CrawlSpider):
     name = "dbmusic"
-    allowed_domains = ["douban.com"]
+    allowed_domains = ["book.douban.com"]
     start_urls = [
         "https://book.douban.com/subject/26758235/",
         "https://book.douban.com/subject/26848051/",
@@ -23,12 +23,22 @@ class DMusicSpider(CrawlSpider):
         if m:
             return m.group(0)
 
-    rules =(
-        Rule(LinkExtractor(allow=r'/subject/[0-9]+',process_value = process_value),callback= 'parse_subject', follow= True ),
-        Rule(LinkExtractor(allow=r'/tag'), follow= False ),
+    def process_value2(value):
+        m = re.search(r"https://book.douban.com/tag/[^*]+$/", value)
+        if m:
+            return m.group(0)
+
+    def process_value3(value):
+        m = re.search(r"https://book.douban.com/tag/[^*]+?start=[0-9]+/", value)
+        if m:
+            return m.group(0)
+
+    rules = (
+        Rule(LinkExtractor(allow=r'/subject/[0-9]+', process_value=process_value), callback='parse_subject',
+             follow=True),
+        Rule(LinkExtractor(allow=r'/tag/[^*]+$', process_value=process_value3), follow=True),
+        Rule(LinkExtractor(allow=r'/tag/[^*]+?start=[0-9]+', process_value=process_value2), follow=True),
     )
-
-
 
     def parse_subject(self, response):
         item = DMusicItem()
